@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/dronestock/drone"
-	"github.com/dronestock/todo/internal"
+	"github.com/dronestock/s3/internal"
 )
 
 func main() {

@@ -44,10 +44,13 @@ clone:
 
 
 environment:
-  NAME: maven
-  OUTPUT_LINUX: maven.amd64.lin
-  OUTPUT_WINDOWS: maven.amd64.exe
-  OUTPUT_MAC: maven.amd64.mac
+  NAME: s3
+  OUTPUT_LINUX: s3.amd64.lin
+  OUTPUT_WINDOWS: s3.amd64.exe
+  OUTPUT_MAC: s3.amd64.mac
+  DOCKER_REGISTRY: ccr.ccs.tencentyun.com
+  DOCKER_REPOSITORY: dronestock/s3
+  DOCKER_TAG: 0.0.$${DRONE_BUILD_NUMBER}
   CHANGELOG_TAG_OUTPUT: CHANGELOG.tag.md
 
 
@@ -90,7 +93,8 @@ steps:
       PASSWORD_CCR:
         from_secret: password_ccr
     settings:
-      repository: dronestock/$${NAME}
+      repository: $${DOCKER_REPOSITORY}
+      tag: $${DOCKER_TAG}
       registries:
         - username: dronestock
           password: $${PASSWORD_DOCKER}
