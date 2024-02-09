@@ -1,15 +1,15 @@
 FROM storezhang/alpine
 
 
-LABEL author="storezhang<华寅>"
-LABEL email="storezhang@gmail.com"
-LABEL qq="160290688"
-LABEL wechat="storezhang"
-LABEL description="Drone持续集成Maven插件，支持测试、打包、发布等常规功能"
+LABEL author="storezhang<华寅>" \
+    email="storezhang@gmail.com" \
+    qq="160290688" \
+    wechat="storezhang" \
+    description="Drone持续集成系统S3插件，通过S3插件来完成文件上传、删除、修改等操作，可以方便的在CI/CD流程中集成"
 
 
 # 复制文件
-COPY cos /bin
+COPY s3 /usr/local/bin
 
 
 RUN set -ex \
@@ -17,7 +17,7 @@ RUN set -ex \
     \
     \
     # 增加执行权限
-    && chmod +x /bin/cos \
+    && chmod +x /usr/local/bin/s3 \
     \
     \
     \
@@ -26,4 +26,4 @@ RUN set -ex \
 
 
 # 执行命令
-ENTRYPOINT /bin/cos
+ENTRYPOINT /usr/local/bin/s3
