@@ -13,7 +13,7 @@ import (
 type Plugin struct {
 	drone.Base
 	config.Wrapper
-	config.Secret `default:"${SECRET}" json:"secret,omitempty"`
+	config.Secret
 
 	client *s3.Client
 }
