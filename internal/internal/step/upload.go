@@ -54,7 +54,7 @@ func (u *Upload) upload(ctx *context.Context, path string) (err error) {
 	if really, re := filepath.Rel(u.config.Folder, path); nil != re {
 		err = re
 		u.logger.Error("获取文件相对路径出错", field.New("path", path), field.Error(err))
-	} else if file, oe := os.Open(really); nil != oe {
+	} else if file, oe := os.Open(path); nil != oe {
 		err = oe
 	} else {
 		err = u.put(ctx, really, file)
