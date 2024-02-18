@@ -55,6 +55,5 @@ func (p *Plugin) Fields() gox.Fields[any] {
 		field.New("clear", p.Clear),
 		field.New("prefix", p.Prefix),
 		field.New("suffix", p.Suffix),
-		field.New("website", p.Website),
 	}
 }

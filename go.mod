@@ -4,8 +4,8 @@ go 1.21
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.25.0
-	github.com/aws/aws-sdk-go-v2/credentials v1.16.16
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.49.0
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.0
 	github.com/dronestock/drone v1.1.6
 	github.com/goexl/gfx v0.1.7
 	github.com/goexl/gox v0.3.8
