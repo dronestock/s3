@@ -6,7 +6,7 @@ type Wrapper struct {
 	// 存储桶地址
 	Endpoint string `default:"${ENDPOINT}" validate:"required,url" json:"endpoint,omitempty"`
 	// 区域
-	Region string `default:"${REGIN}" json:"region,omitempty"`
+	Region string `default:"${REGIN=ap-chengdu}" json:"region,omitempty"`
 	// 桶
 	Bucket string `default:"${BUCKET}" json:"bucket,omitempty"`
 
@@ -18,7 +18,4 @@ type Wrapper struct {
 	Prefix string `default:"${PREFIX}" json:"prefix,omitempty"`
 	// 路径后缀，所有文件上传都会在这上面加上后缀
 	Suffix string `default:"${SUFFIX}" json:"suffix,omitempty"`
-
-	// 静态网站
-	Website Website `default:"${WEBSITE}" json:"website,omitempty"`
 }

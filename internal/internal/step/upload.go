@@ -51,33 +51,13 @@ func (u *Upload) Run(ctx *context.Context) (err error) {
 }
 
 func (u *Upload) upload(ctx *context.Context, path string) (err error) {
-	rel := ""
-	if _rel, re := filepath.Rel(u.config.Folder, path); nil != re {
+	if really, re := filepath.Rel(u.config.Folder, path); nil != re {
 		err = re
 		u.logger.Error("获取文件相对路径出错", field.New("path", path), field.Error(err))
-	} else {
-		rel = _rel
-	}
-	if nil != err {
-		return
-	}
-
-	paths := strings.Split(rel, string(filepath.Separator))
-	if "" != u.config.Prefix {
-		paths = append([]string{u.config.Prefix}, paths...)
-	}
-	if "" != u.config.Suffix {
-		paths = append(paths, u.config.Suffix)
-	}
-
-	rel = strings.Join(paths, u.config.Separator)
-	poi := new(s3.PutObjectInput)
-	poi.Bucket = aws.String(u.config.Bucket)
-	poi.Key = aws.String(path)
-	if file, oe := os.Open(rel); nil != oe {
+	} else if file, oe := os.Open(really); nil != oe {
 		err = oe
 	} else {
-		err = u.put(ctx, path, file)
+		err = u.put(ctx, really, file)
 	}
 
 	return
@@ -86,14 +66,21 @@ func (u *Upload) upload(ctx *context.Context, path string) (err error) {
 func (u *Upload) put(ctx *context.Context, path string, body io.Reader) (err error) {
 	poi := new(s3.PutObjectInput)
 	poi.Bucket = aws.String(u.config.Bucket)
-	poi.Key = aws.String(path)
+	paths := strings.Split(path, string(filepath.Separator))
+	if "" != u.config.Prefix {
+		paths = append([]string{u.config.Prefix}, paths...)
+	}
+	if "" != u.config.Suffix {
+		paths = append(paths, u.config.Suffix)
+	}
+	poi.Key = aws.String(strings.Join(paths, u.config.Separator))
 	poi.Body = body
 
 	fields := gox.Fields[any]{
 		field.New("path", path),
 	}
-	if out, ue := u.client.PutObject(*ctx, poi); nil != ue {
-		err = ue
+	if out, poe := u.client.PutObject(*ctx, poi); nil != poe {
+		err = poe
 		u.logger.Error("上传文件出错", fields.Add(field.Error(err))...)
 	} else if nil == out {
 		u.logger.Warn("上传文件失败", fields...)
