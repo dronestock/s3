@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/dronestock/s3/internal/internal/config"
+	"github.com/gabriel-vasile/mimetype"
 	"github.com/goexl/gfx"
 	"github.com/goexl/gox"
 	"github.com/goexl/gox/field"
@@ -42,7 +43,7 @@ func (u *Upload) Runnable() (runnable bool) {
 
 func (u *Upload) Run(ctx *context.Context) (err error) {
 	for _, path := range u.paths {
-		if err = u.upload(ctx, path); nil != err {
+		if err = u.run(ctx, path); nil != err {
 			return
 		}
 	}
@@ -50,20 +51,20 @@ func (u *Upload) Run(ctx *context.Context) (err error) {
 	return
 }
 
-func (u *Upload) upload(ctx *context.Context, path string) (err error) {
+func (u *Upload) run(ctx *context.Context, path string) (err error) {
 	if really, re := filepath.Rel(u.config.Folder, path); nil != re {
 		err = re
 		u.logger.Error("获取文件相对路径出错", field.New("path", path), field.Error(err))
 	} else if file, oe := os.Open(path); nil != oe {
 		err = oe
 	} else {
-		err = u.put(ctx, really, file)
+		err = u.upload(ctx, really, file)
 	}
 
 	return
 }
 
-func (u *Upload) put(ctx *context.Context, path string, body io.Reader) (err error) {
+func (u *Upload) upload(ctx *context.Context, path string, body io.Reader) (err error) {
 	poi := new(s3.PutObjectInput)
 	poi.Bucket = aws.String(u.config.Bucket)
 	paths := strings.Split(path, string(filepath.Separator))
@@ -74,18 +75,29 @@ func (u *Upload) put(ctx *context.Context, path string, body io.Reader) (err err
 		paths = append(paths, u.config.Suffix)
 	}
 	poi.Key = aws.String(strings.Join(paths, u.config.Separator))
-	poi.Body = body
 
 	fields := gox.Fields[any]{
 		field.New("path", path),
 	}
-	if out, poe := u.client.PutObject(*ctx, poi); nil != poe {
+	if mime, dre := mimetype.DetectReader(body); nil != dre {
+		err = dre
+		u.logger.Warn("探查文件类型出错", fields...)
+	} else {
+		poi.ContentType = aws.String(mime.String())
+		err = u.put(ctx, poi, &fields)
+	}
+
+	return
+}
+
+func (u *Upload) put(ctx *context.Context, input *s3.PutObjectInput, fields *gox.Fields[any]) (err error) {
+	if out, poe := u.client.PutObject(*ctx, input); nil != poe {
 		err = poe
 		u.logger.Error("上传文件出错", fields.Add(field.Error(err))...)
 	} else if nil == out {
-		u.logger.Warn("上传文件失败", fields...)
+		u.logger.Warn("上传文件失败", *fields...)
 	} else {
-		u.logger.Debug("文件上传成功", fields...)
+		u.logger.Debug("文件上传成功", *fields...)
 	}
 
 	return
