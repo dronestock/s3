@@ -32,8 +32,7 @@ func (p *Plugin) Setup() (err error) {
 		Region:           p.Region,
 		EndpointResolver: s3.EndpointResolverFromURL(p.Endpoint),
 		UsePathStyle:     true,
-		// TODO 替换成goexl/http
-		// HTTPClient:       p.Http(),
+		HTTPClient:       p.Http(),
 	}
 	p.client = s3.New(options)
 
