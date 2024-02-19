@@ -67,6 +67,8 @@ func (u *Upload) run(ctx *context.Context, path string) (err error) {
 func (u *Upload) upload(ctx *context.Context, path string, body io.Reader) (err error) {
 	poi := new(s3.PutObjectInput)
 	poi.Bucket = aws.String(u.config.Bucket)
+	poi.Body = body
+
 	paths := strings.Split(path, string(filepath.Separator))
 	if "" != u.config.Prefix {
 		paths = append([]string{u.config.Prefix}, paths...)
