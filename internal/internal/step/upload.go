@@ -92,6 +92,4 @@ func (u *Upload) upload(ctx *context.Context, path string, body io.Reader) (err 
 	}
 
 	return
-
-	return
 }
