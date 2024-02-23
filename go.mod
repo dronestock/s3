@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/aws/aws-sdk-go-v2 v1.25.1
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.2
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.50.2
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.51.0
 	github.com/dronestock/drone v1.1.8
 	github.com/goexl/gfx v0.1.7
 	github.com/goexl/gox v0.3.8
@@ -13,14 +13,14 @@ require (
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.0 // indirect
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.1 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.1 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.1 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.0 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.1 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.3.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.3.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.1 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.17.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.17.1 // indirect
 	github.com/aws/smithy-go v1.20.1 // indirect
 	github.com/drone/envsubst v1.0.3 // indirect
 	github.com/expr-lang/expr v1.16.0 // indirect
