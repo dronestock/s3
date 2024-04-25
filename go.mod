@@ -1,14 +1,15 @@
 module github.com/dronestock/s3
 
 go 1.21
+toolchain go1.22.2
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.26.1
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.11
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.53.1
-	github.com/dronestock/drone v1.1.9
+	github.com/dronestock/drone v1.2.1
 	github.com/goexl/gfx v0.1.7
-	github.com/goexl/gox v0.4.3
+	github.com/goexl/gox v0.4.4
 	github.com/goexl/log v0.0.7
 )
 
@@ -30,10 +31,11 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.19.0 // indirect
 	github.com/go-resty/resty/v2 v2.12.0 // indirect
+	github.com/goexl/args v0.0.1 // indirect
 	github.com/goexl/baozheng v0.0.1 // indirect
 	github.com/goexl/env v0.0.2 // indirect
 	github.com/goexl/exception v0.0.1 // indirect
-	github.com/goexl/gex v0.3.2 // indirect
+	github.com/goexl/gex v0.3.3 // indirect
 	github.com/goexl/guc v0.0.7 // indirect
 	github.com/goexl/http v0.1.9 // indirect
 	github.com/goexl/mengpo v0.2.5 // indirect
