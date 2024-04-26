@@ -12,8 +12,13 @@ import (
 
 type Plugin struct {
 	drone.Base
-	config.Wrapper
-	config.Secret
+
+	// 源
+	Source config.Source `default:"${SOURCE}" json:"source,omitempty"`
+	// 自身配置
+	S3 config.S3 `default:"${S3}" json:"s3,omitempty"`
+	// 密钥
+	Secret config.Secret `default:"${SECRET}" json:"secret,omitempty"`
 
 	client *s3.Client
 }
@@ -28,9 +33,9 @@ func (p *Plugin) Config() drone.Config {
 
 func (p *Plugin) Setup() (err error) {
 	options := s3.Options{
-		Credentials:      credentials.NewStaticCredentialsProvider(p.Ak, p.Sk, p.Session),
-		Region:           p.Region,
-		EndpointResolver: s3.EndpointResolverFromURL(p.Endpoint),
+		Credentials:      credentials.NewStaticCredentialsProvider(p.Secret.Ak, p.Secret.Sk, p.Secret.Session),
+		Region:           p.S3.Region,
+		EndpointResolver: s3.EndpointResolverFromURL(p.S3.Endpoint),
 		UsePathStyle:     true,
 		HTTPClient:       p.Http(),
 	}
@@ -41,18 +46,14 @@ func (p *Plugin) Setup() (err error) {
 
 func (p *Plugin) Steps() drone.Steps {
 	return drone.Steps{
-		drone.NewStep(step.NewUpload(&p.Wrapper, p.client, p.Logger)).Name("上传文件").Build(),
+		drone.NewStep(step.NewUpload(&p.Source, &p.S3, p.client, p.Logger)).Name("上传文件").Build(),
 	}
 }
 
 func (p *Plugin) Fields() gox.Fields[any] {
 	return gox.Fields[any]{
-		field.New("folder", p.Folder),
+		field.New("source", p.Source),
 		field.New("secret", p.Secret),
-		field.New("endpoint", p.Endpoint),
-		field.New("separator", p.Separator),
-		field.New("clear", p.Clear),
-		field.New("prefix", p.Prefix),
-		field.New("suffix", p.Suffix),
+		field.New("s3", p.S3),
 	}
 }

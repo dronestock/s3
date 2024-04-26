@@ -18,22 +18,26 @@ import (
 )
 
 type Upload struct {
-	config *config.Wrapper
+	source *config.Source
+	s3     *config.S3
+
 	paths  []string
 	client *s3.Client
 	logger log.Logger
 }
 
-func NewUpload(config *config.Wrapper, client *s3.Client, logger log.Logger) *Upload {
+func NewUpload(source *config.Source, s3 *config.S3, client *s3.Client, logger log.Logger) *Upload {
 	return &Upload{
-		config: config,
+		source: source,
+		s3:     s3,
+
 		client: client,
 		logger: logger,
 	}
 }
 
 func (u *Upload) Runnable() (runnable bool) {
-	if paths, ae := gfx.All(u.config.Folder); nil == ae || 0 != len(paths) {
+	if paths, ae := gfx.All(u.source.Folder); nil == ae || 0 != len(paths) {
 		runnable = true
 		u.paths = paths
 	}
@@ -52,7 +56,7 @@ func (u *Upload) Run(ctx *context.Context) (err error) {
 }
 
 func (u *Upload) run(ctx *context.Context, path string) (err error) {
-	if really, re := filepath.Rel(u.config.Folder, path); nil != re {
+	if really, re := filepath.Rel(u.source.Folder, path); nil != re {
 		err = re
 		u.logger.Error("获取文件相对路径出错", field.New("path", path), field.Error(err))
 	} else if body, oe := os.Open(path); nil != oe {
@@ -66,18 +70,18 @@ func (u *Upload) run(ctx *context.Context, path string) (err error) {
 
 func (u *Upload) upload(ctx *context.Context, path string, body io.Reader) (err error) {
 	poi := new(s3.PutObjectInput)
-	poi.Bucket = aws.String(u.config.Bucket)
+	poi.Bucket = aws.String(u.s3.Bucket)
 	poi.Body = body
 	poi.ContentType = aws.String(mime.TypeByExtension(filepath.Ext(path)))
 
 	paths := strings.Split(path, string(filepath.Separator))
-	if "" != u.config.Prefix {
-		paths = append([]string{u.config.Prefix}, paths...)
+	if "" != u.source.Prefix {
+		paths = append([]string{u.source.Prefix}, paths...)
 	}
-	if "" != u.config.Suffix {
-		paths = append(paths, u.config.Suffix)
+	if "" != u.source.Suffix {
+		paths = append(paths, u.source.Suffix)
 	}
-	poi.Key = aws.String(strings.Join(paths, u.config.Separator))
+	poi.Key = aws.String(strings.Join(paths, u.s3.Separator))
 
 	fields := gox.Fields[any]{
 		field.New("path", path),
