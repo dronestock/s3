@@ -9,7 +9,8 @@ LABEL author="storezhang<华寅>" \
 
 
 # 复制文件
-COPY s3 /usr/local/bin
+ARG TARGETPLATFORM
+COPY dist/${TARGETPLATFORM}/s3 /usr/local/bin
 
 
 RUN set -ex \
