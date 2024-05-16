@@ -4,7 +4,7 @@ go 1.22
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.26.2
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.13
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.14
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.54.1
 	github.com/dronestock/drone v1.2.4
 	github.com/goexl/gfx v0.1.7
