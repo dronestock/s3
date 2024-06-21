@@ -1,4 +1,4 @@
-FROM dockerhub.storezhang.tech/dockerat/alpine:3.20.0.146
+FROM ccr.ccs.tencentyun.com/dockerat/alpine:3.20.0.146
 
 
 LABEL author="storezhang<华寅>" \

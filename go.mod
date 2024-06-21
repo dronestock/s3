@@ -34,8 +34,8 @@ require (
 	github.com/goexl/baozheng v0.0.1 // indirect
 	github.com/goexl/env v0.0.2 // indirect
 	github.com/goexl/exception v0.0.1 // indirect
-	github.com/goexl/gex v0.3.7 // indirect
-	github.com/goexl/guc v0.0.7 // indirect
+	github.com/goexl/gex v0.4.3 // indirect
+	github.com/goexl/guc v0.1.3 // indirect
 	github.com/goexl/http v0.1.9 // indirect
 	github.com/goexl/mengpo v0.2.6 // indirect
 	github.com/goexl/xiren v0.0.6 // indirect
