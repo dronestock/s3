@@ -1,4 +1,4 @@
-FROM storezhang/alpine:3.20.0.139
+FROM dockerhub.storezhang.tech/dockerat/alpine:3.20.0.146
 
 
 LABEL author="storezhang<华寅>" \
