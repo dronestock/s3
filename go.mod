@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.32
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.61.0
 	github.com/dronestock/drone v1.2.5
-	github.com/goexl/gfx v0.1.7
+	github.com/goexl/gfx v0.2.1
 	github.com/goexl/gox v1.8.5
 	github.com/goexl/log v0.0.7
 )
@@ -45,6 +45,6 @@ require (
 	github.com/rs/xid v1.5.0 // indirect
 	golang.org/x/crypto v0.24.0 // indirect
 	golang.org/x/net v0.26.0 // indirect
-	golang.org/x/sys v0.21.0 // indirect
-	golang.org/x/text v0.16.0 // indirect
+	golang.org/x/sys v0.25.0 // indirect
+	golang.org/x/text v0.18.0 // indirect
 )
