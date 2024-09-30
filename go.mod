@@ -5,7 +5,7 @@ toolchain go1.23.0
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.31.0
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.36
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.37
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.63.2
 	github.com/dronestock/drone v1.2.6
 	github.com/goexl/gfx v0.2.3
