@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.41
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.66.2
 	github.com/dronestock/drone v1.2.6
-	github.com/goexl/gfx v0.2.3
+	github.com/goexl/gfx v0.2.4
 	github.com/goexl/gox v1.8.9
 	github.com/goexl/log v0.0.7
 )
@@ -25,7 +25,7 @@ require (
 	github.com/aws/smithy-go v1.22.0 // indirect
 	github.com/drone/envsubst v1.0.3 // indirect
 	github.com/expr-lang/expr v1.16.9 // indirect
-	github.com/fsnotify/fsnotify v1.7.0 // indirect
+	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.5 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
@@ -46,5 +46,5 @@ require (
 	golang.org/x/crypto v0.27.0 // indirect
 	golang.org/x/net v0.29.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
-	golang.org/x/text v0.18.0 // indirect
+	golang.org/x/text v0.19.0 // indirect
 )
