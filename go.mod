@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.66.2
 	github.com/dronestock/drone v1.2.6
 	github.com/goexl/gfx v0.2.5
-	github.com/goexl/gox v1.8.9
+	github.com/goexl/gox v1.9.0
 	github.com/goexl/log v0.0.7
 )
 
