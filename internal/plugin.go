@@ -36,7 +36,7 @@ func (p *Plugin) Setup() (err error) {
 		Credentials:      credentials.NewStaticCredentialsProvider(p.Secret.Ak, p.Secret.Sk, p.Secret.Session),
 		Region:           p.S3.Region,
 		EndpointResolver: s3.EndpointResolverFromURL(p.S3.Endpoint),
-		UsePathStyle:     true,
+		UsePathStyle:     false,
 		HTTPClient:       p.Http(),
 	}
 	p.client = s3.New(options)
