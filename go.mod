@@ -4,8 +4,8 @@ go 1.23
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.33.0
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.73.2
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.54
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.74.0
 	github.com/dronestock/drone v1.2.6
 	github.com/goexl/gfx v0.2.5
 	github.com/goexl/gox v1.9.2
