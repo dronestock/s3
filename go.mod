@@ -3,7 +3,7 @@ module github.com/dronestock/s3
 go 1.23
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.35.0
+	github.com/aws/aws-sdk-go-v2 v1.36.0
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.55
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.75.1
 	github.com/dronestock/drone v1.2.6
