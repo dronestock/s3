@@ -5,7 +5,7 @@ go 1.27
 require (
 	github.com/aws/aws-sdk-go-v2 v1.47.0
 	github.com/aws/aws-sdk-go-v2/credentials v1.20.5
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.113.1
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.113.2
 	github.com/dronestock/drone v1.2.6
 	github.com/goexl/gfx v0.2.8
 	github.com/goexl/gox v1.9.3
